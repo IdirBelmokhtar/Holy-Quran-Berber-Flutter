@@ -31,7 +31,7 @@ if (keystorePropertiesFile.exists()) {
 android {
     namespace = "com.quran.berber"
     compileSdkVersion 36
-    ndkVersion "27.0.12077973" // flutter.ndkVersion
+    ndkVersion flutter.ndkVersion
 
     defaultConfig {
         multiDexEnabled true
@@ -44,10 +44,9 @@ android {
     }
 
     kotlinOptions {
-        jvmTarget = '17' // JavaVersion.VERSION_17
+        jvmTarget = "17"
     }
 
-    // Ensure Kotlin uses JDK 17 toolchain
     kotlin {
         jvmToolchain(17)
     }
@@ -69,11 +68,13 @@ android {
     }
 
     signingConfigs {
-        release {
-            keyAlias keystoreProperties['keyAlias']
-            keyPassword keystoreProperties['keyPassword']
-            storeFile file(keystoreProperties['storeFile'])
-            storePassword keystoreProperties['storePassword']
+        if (keystorePropertiesFile.exists()) {
+            release {
+                keyAlias keystoreProperties['keyAlias']
+                keyPassword keystoreProperties['keyPassword']
+                storeFile file(keystoreProperties['storeFile'])
+                storePassword keystoreProperties['storePassword']
+            }
         }
     }
 
@@ -81,7 +82,9 @@ android {
         release {
             // TODO: Add your own signing config for the release build.
             // Signing with the debug keys for now, so `flutter run --release` works.
-            signingConfig signingConfigs.release
+            if (keystorePropertiesFile.exists()) {
+                signingConfig signingConfigs.release
+            }
         }
     }
 }
@@ -92,5 +95,5 @@ flutter {
 
 dependencies {
     implementation 'com.google.android.material:material:1.6.1'
-    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.2.2'
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.1.4'
 }

@@ -57,17 +57,17 @@ class _BerberTranslateSheetState extends State<BerberTranslateSheet> {
   String _imagePath(int surah, int ayah, int part) {
     final s = surah.toString().padLeft(3, '0');
     final a = ayah.toString().padLeft(3, '0');
-    return 'assets/translate_kabyle_image_hafs/translate_$s/${a}_$part.jpg';
+    return 'assets/data/translate_kabyle_image_hafs/translate_$s/${a}_$part.jpg';
   }
 
   String _audioPath(int surah, int ayah) {
     final s = surah.toString().padLeft(3, '0');
     final a = ayah.toString().padLeft(3, '0');
-    return 'assets/translate_kabyle_voix_hafs/$s/$a.mp3';
+    return ApiConstants.berberTranslateUrlAssets + 'assets/data/translate_kabyle_voix_hafs/$s/$a.mp3';
   }
 
   List<String> _imagePaths(int surah, int ayah) =>
-      List.generate(60, (i) => _imagePath(surah, ayah, i));
+      List.generate(80, (i) => _imagePath(surah, ayah, i));
 
   // ---- navigation ----
 
@@ -97,7 +97,17 @@ class _BerberTranslateSheetState extends State<BerberTranslateSheet> {
     }
     final path = _audioPath(widget.surahNum, _currentAyah);
     try {
-      await _berberPlayer.setAsset(path);
+      // Android
+      GetPlatform.isAndroid
+          ? await _berberPlayer.setUrl(path)
+          // IOS
+          : GetPlatform.isIOS
+          ? await _berberPlayer.setUrl(path)
+          // Web
+          : await _berberPlayer.setUrl(path);
+
+      // use this if you want to play from url //? await _berberPlayer.setAsset(path);
+
       _berberPlayer.play();
       setState(() => _isPlaying = true);
       _berberPlayer.playerStateStream.listen((s) {
@@ -181,7 +191,10 @@ class _BerberTranslateSheetState extends State<BerberTranslateSheet> {
 
               // ── Top Header Bar ──
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 4),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16.0,
+                  vertical: 4,
+                ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -197,24 +210,12 @@ class _BerberTranslateSheetState extends State<BerberTranslateSheet> {
                     Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        // Audio play/stop button
-                        IconButton(
-                          onPressed: _toggleAudio,
-                          icon: AnimatedSwitcher(
-                            duration: const Duration(milliseconds: 300),
-                            child: Icon(
-                              _isPlaying
-                                  ? Icons.stop_circle_rounded
-                                  : Icons.play_circle_filled_rounded,
-                              key: ValueKey(_isPlaying),
-                              size: 28,
-                              color: _isPlaying ? Colors.red.shade400 : primary,
-                            ),
-                          ),
-                          tooltip: _isPlaying ? 'إيقاف' : 'استماع للترجمة',
-                        ),
                         // Divider
-                        Container(width: 1, height: 24, color: Colors.grey.shade300),
+                        Container(
+                          width: 1,
+                          height: 24,
+                          color: Colors.grey.shade300,
+                        ),
                         const SizedBox(width: 4),
                         // Global font size dropdown (Controls Arabic Text)
                         const SizedBox().fontSizeDropDownWidget(),
@@ -234,7 +235,9 @@ class _BerberTranslateSheetState extends State<BerberTranslateSheet> {
                               ),
                             ),
                           ),
-                          color: Get.theme.colorScheme.primary.withValues(alpha: .8),
+                          color: Get.theme.colorScheme.primary.withValues(
+                            alpha: .8,
+                          ),
                           iconSize: 35.0,
                           itemBuilder: (context) => [
                             PopupMenuItem(
@@ -256,27 +259,34 @@ class _BerberTranslateSheetState extends State<BerberTranslateSheet> {
                                     ),
                                     activeTrackBar: BoxDecoration(
                                       borderRadius: BorderRadius.circular(4),
-                                      color: Get.theme.colorScheme.primaryContainer,
+                                      color: Get
+                                          .theme
+                                          .colorScheme
+                                          .primaryContainer,
                                     ),
                                   ),
-                                  handlerAnimation: const FlutterSliderHandlerAnimation(
-                                    curve: Curves.elasticOut,
-                                    reverseCurve: null,
-                                    duration: Duration(milliseconds: 700),
-                                    scale: 1.4,
-                                  ),
-                                  onDragging: (handlerIndex, lowerValue, upperValue) {
-                                    setState(() {
-                                      _imgHeight = lowerValue;
-                                    });
-                                  },
+                                  handlerAnimation:
+                                      const FlutterSliderHandlerAnimation(
+                                        curve: Curves.elasticOut,
+                                        reverseCurve: null,
+                                        duration: Duration(milliseconds: 700),
+                                        scale: 1.4,
+                                      ),
+                                  onDragging:
+                                      (handlerIndex, lowerValue, upperValue) {
+                                        setState(() {
+                                          _imgHeight = lowerValue;
+                                        });
+                                      },
                                   handler: FlutterSliderHandler(
                                     decoration: const BoxDecoration(),
                                     child: Material(
                                       type: MaterialType.circle,
                                       color: Colors.transparent,
                                       elevation: 3,
-                                      child: SvgPicture.asset('assets/svg/slider_ic.svg'),
+                                      child: SvgPicture.asset(
+                                        'assets/svg/slider_ic.svg',
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -294,7 +304,10 @@ class _BerberTranslateSheetState extends State<BerberTranslateSheet> {
               Expanded(
                 child: Container(
                   width: MediaQuery.of(context).size.width,
-                  margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 4.0),
+                  margin: const EdgeInsets.symmetric(
+                    horizontal: 16.0,
+                    vertical: 4.0,
+                  ),
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
                     color: isDark
@@ -319,7 +332,8 @@ class _BerberTranslateSheetState extends State<BerberTranslateSheet> {
                           () => GetSingleAyah(
                             surahNumber: widget.surahNum,
                             ayahNumber: _currentAyah,
-                            fontSize: TafsirCtrl.instance.fontSizeArabic.value + 2,
+                            fontSize:
+                                TafsirCtrl.instance.fontSizeArabic.value + 2,
                             isBold: false,
                             isSingleAyah: true,
                             isDark: isDark,
@@ -341,12 +355,18 @@ class _BerberTranslateSheetState extends State<BerberTranslateSheet> {
                         GetBuilder<TafsirAndTranslateController>(
                           builder: (transCtrl) {
                             final quranCtrl = QuranController.instance;
-                            final ayahModel = quranCtrl.state.surahs[widget.surahNum - 1]
+                            final ayahModel = quranCtrl
+                                .state
+                                .surahs[widget.surahNum - 1]
                                 .ayahs[_currentAyah - 1];
                             final translation = TafsirCtrl.instance
-                                .getTranslationForAyahModel(ayahModel, ayahModel.ayahUQNumber);
+                                .getTranslationForAyahModel(
+                                  ayahModel,
+                                  ayahModel.ayahUQNumber,
+                                );
 
-                            if (translation == null || translation.cleanText.isEmpty) {
+                            if (translation == null ||
+                                translation.cleanText.isEmpty) {
                               return const SizedBox.shrink();
                             }
 
@@ -356,9 +376,18 @@ class _BerberTranslateSheetState extends State<BerberTranslateSheet> {
                                 Text(
                                   translation.cleanText,
                                   style: TextStyle(
-                                    fontSize: sl<GeneralController>().state.fontSizeArabic.value - 3,
-                                    fontFamily: sl<SettingsController>().languageFont.value,
-                                    color: isDark ? Colors.grey.shade300 : Colors.grey.shade800,
+                                    fontSize:
+                                        sl<GeneralController>()
+                                            .state
+                                            .fontSizeArabic
+                                            .value -
+                                        3,
+                                    fontFamily: sl<SettingsController>()
+                                        .languageFont
+                                        .value,
+                                    color: isDark
+                                        ? Colors.grey.shade300
+                                        : Colors.grey.shade800,
                                   ),
                                   textAlign: TextAlign.left,
                                 ),
@@ -375,29 +404,67 @@ class _BerberTranslateSheetState extends State<BerberTranslateSheet> {
                           },
                         ),
 
+                        // Audio play/stop button
+                        _buildAudioButton(),
+
                         // Berber translation images — RTL flowing text with transparent BG
-                        Directionality(
-                          textDirection: TextDirection.rtl,
-                          child: Wrap(
-                            direction: Axis.horizontal,
-                            alignment: WrapAlignment.start,
-                            crossAxisAlignment: WrapCrossAlignment.center,
-                            spacing: 4 * scaleFactor,
-                            runSpacing: 2 * scaleFactor,
-                            children: _imagePaths(widget.surahNum, _currentAyah)
-                                .map((path) => ColorFiltered(
-                                      colorFilter: isDark ? _darkFilter : _lightFilter,
-                                      child: Image.asset(
-                                        path,
-                                        height: _imgHeight,
-                                        fit: BoxFit.contain,
-                                        errorBuilder: (_, __, ___) =>
-                                            const SizedBox.shrink(),
-                                      ),
-                                    ))
-                                .toList(),
-                          ),
-                        ),
+                        GetPlatform.isWeb
+                            ? Directionality(
+                                textDirection: TextDirection.rtl,
+                                child: Wrap(
+                                  direction: Axis.horizontal,
+                                  alignment: WrapAlignment.start,
+                                  crossAxisAlignment: WrapCrossAlignment.center,
+                                  spacing: 4 * scaleFactor,
+                                  runSpacing: 2 * scaleFactor,
+                                  children:
+                                      _imagePaths(widget.surahNum, _currentAyah)
+                                          .map(
+                                            (path) => ColorFiltered(
+                                              colorFilter: isDark
+                                                  ? _darkFilter
+                                                  : _lightFilter,
+                                              child: Image.asset(
+                                                path,
+                                                height: _imgHeight,
+                                                fit: BoxFit.contain,
+                                                errorBuilder: (_, __, ___) =>
+                                                    const SizedBox.shrink(),
+                                              ),
+                                            ),
+                                          )
+                                          .toList(),
+                                ),
+                              )
+                            : Directionality(
+                                textDirection: TextDirection.rtl,
+                                child: Wrap(
+                                  direction: Axis.horizontal,
+                                  alignment: WrapAlignment.start,
+                                  crossAxisAlignment: WrapCrossAlignment.center,
+                                  spacing: 4 * scaleFactor,
+                                  runSpacing: 2 * scaleFactor,
+                                  children:
+                                      _imagePaths(widget.surahNum, _currentAyah)
+                                          .map(
+                                            (path) =>
+                                                //! ColorFiltered(
+                                                //! colorFilter: isDark ? _darkFilter : _lightFilter,
+                                                //! child:
+                                                CachedNetworkImage(
+                                                  imageUrl: path,
+                                                  height: _imgHeight,
+                                                  fit: BoxFit.contain,
+                                                  errorWidget: (_, __, ___) =>
+                                                      const SizedBox.shrink(),
+                                                  placeholder: (_, __) =>
+                                                      const SizedBox.shrink(),
+                                                ),
+                                          )
+                                          //! )
+                                          .toList(),
+                                ),
+                              ),
                       ],
                     ),
                   ),
@@ -406,14 +473,17 @@ class _BerberTranslateSheetState extends State<BerberTranslateSheet> {
 
               // ── Prev / Next Ayah Navigation ──
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16.0,
+                  vertical: 8.0,
+                ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     // In RTL: right side = "previous" (higher ayah number)
                     TextButton.icon(
                       onPressed: _currentAyah > 1 ? _goToPrevAyah : null,
-                      icon: const Icon(Icons.arrow_forward_ios_rounded, size: 14),
+                      // icon: const Icon(Icons.arrow_back_ios_rounded,size: 14,),
                       label: Text('prev_ayah'.tr),
                       style: TextButton.styleFrom(foregroundColor: primary),
                     ),
@@ -424,7 +494,9 @@ class _BerberTranslateSheetState extends State<BerberTranslateSheet> {
                             ? Text(
                                 '${widget.surahNum} : $_currentAyah',
                                 style: TextStyle(
-                                  color: isDark ? Colors.grey.shade400 : Colors.grey.shade600,
+                                  color: isDark
+                                      ? Colors.grey.shade400
+                                      : Colors.grey.shade600,
                                   fontSize: 13,
                                   fontWeight: FontWeight.w600,
                                 ),
@@ -435,7 +507,9 @@ class _BerberTranslateSheetState extends State<BerberTranslateSheet> {
                                   Text(
                                     '${_surahsData[widget.surahNum - 1]['sura_name_berber']} - ${_surahsData[widget.surahNum - 1]['sura_name_ar']}',
                                     style: TextStyle(
-                                      color: isDark ? Colors.grey.shade300 : Colors.grey.shade800,
+                                      color: isDark
+                                          ? Colors.grey.shade300
+                                          : Colors.grey.shade800,
                                       fontSize: 12,
                                       fontWeight: FontWeight.bold,
                                       fontFamily: 'droid_kufi',
@@ -444,7 +518,9 @@ class _BerberTranslateSheetState extends State<BerberTranslateSheet> {
                                   Text(
                                     '${_surahsData[widget.surahNum - 1]['sura_name_en']} : $_currentAyah',
                                     style: TextStyle(
-                                      color: isDark ? Colors.grey.shade400 : Colors.grey.shade600,
+                                      color: isDark
+                                          ? Colors.grey.shade400
+                                          : Colors.grey.shade600,
                                       fontSize: 11,
                                       fontWeight: FontWeight.w600,
                                     ),
@@ -456,7 +532,7 @@ class _BerberTranslateSheetState extends State<BerberTranslateSheet> {
                     // Next ayah
                     TextButton.icon(
                       onPressed: _goToNextAyah,
-                      icon: const Icon(Icons.arrow_back_ios_rounded, size: 14),
+                      // icon: const Icon(Icons.arrow_forward_ios_rounded, size: 14),
                       label: Text('next_ayah'.tr),
                       style: TextButton.styleFrom(foregroundColor: primary),
                     ),
@@ -464,6 +540,134 @@ class _BerberTranslateSheetState extends State<BerberTranslateSheet> {
                 ),
               ),
             ],
+          ),
+        ),
+      ),
+    );
+  } // زر الصوت الاحترافي مع شريط تقدم RTL - يملأ الخلفية بالكامل
+
+  // Professional audio button with RTL progress - full background fill
+  Widget _buildAudioButton() {
+    final primary = Get.theme.colorScheme.primary;
+    final surface = Get.theme.colorScheme.surface;
+    final isDark = ThemeController.instance.isDarkMode;
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8),
+      child: GestureDetector(
+        onTap: _toggleAudio,
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 250),
+          curve: Curves.easeOutCubic,
+          width: double.infinity, // Full width
+          height: 48, // Fixed height
+          decoration: BoxDecoration(
+            color: isDark ? Colors.grey.shade800 : Colors.grey.shade100,
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(
+              color: _isPlaying
+                  ? surface
+                  : (isDark ? Colors.grey.shade700 : primary.withOpacity(0.2)),
+              width: 1,
+            ),
+          ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(11),
+            child: Stack(
+              alignment: Alignment.centerRight, // Align content to right
+              children: [
+                // Background progress fill - RTL (from right to left)
+                if (_isPlaying)
+                  StreamBuilder<Duration>(
+                    stream: _berberPlayer.positionStream,
+                    builder: (context, positionSnapshot) {
+                      return StreamBuilder<Duration?>(
+                        stream: _berberPlayer.durationStream,
+                        builder: (context, durationSnapshot) {
+                          final position =
+                              positionSnapshot.data ?? Duration.zero;
+                          final duration =
+                              durationSnapshot.data ?? Duration.zero;
+                          final progress = duration.inMilliseconds > 0
+                              ? position.inMilliseconds /
+                                    duration.inMilliseconds
+                              : 0.0;
+
+                          return Align(
+                            alignment:
+                                Alignment.centerRight, // Start from right
+                            child: AnimatedContainer(
+                              duration: const Duration(milliseconds: 200),
+                              curve: Curves.easeOut,
+                              width: double.infinity,
+                              height: 48,
+                              child: FractionallySizedBox(
+                                alignment:
+                                    Alignment.centerRight, // Fill from right
+                                widthFactor: progress.clamp(0.0, 1.0),
+                                child: Container(
+                                  color: surface.withOpacity(
+                                    0.3,
+                                  ), // Progress color (Gold)
+                                ),
+                              ),
+                            ),
+                          );
+                        },
+                      );
+                    },
+                  ),
+                // Button content - aligned right with padding
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      // Icon
+                      Container(
+                        padding: const EdgeInsets.all(6),
+                        decoration: BoxDecoration(
+                          color: _isPlaying
+                              ? surface.withOpacity(0.3)
+                              : primary.withOpacity(0.12),
+                          shape: BoxShape.circle,
+                        ),
+                        child: Icon(
+                          _isPlaying
+                              ? Icons.stop_rounded
+                              : Icons.play_arrow_rounded,
+                          size: 18,
+                          color: _isPlaying ? surface : primary,
+                        ),
+                      ),
+                      const SizedBox(width: 10),
+                      // Text first (right side in RTL)
+                      Text(
+                        _isPlaying ? 'إيقاف' : 'استماع',
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w600,
+                          color: _isPlaying ? surface : primary,
+                          fontFamily: 'cairo',
+                        ),
+                      ),
+                      // Dot indicator when playing
+                      if (_isPlaying) ...[
+                        const SizedBox(width: 10),
+                        Container(
+                          width: 6,
+                          height: 6,
+                          decoration: BoxDecoration(
+                            color: surface,
+                            shape: BoxShape.circle,
+                          ),
+                        ),
+                      ],
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

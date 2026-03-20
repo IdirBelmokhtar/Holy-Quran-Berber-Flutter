@@ -21,4 +21,6 @@ class ApiConstants {
       'https://alheekmahlib.github.io/alheekmahlib/#/download/';
   static const String quranShareUrl =
       'https://alheekmahlib.github.io/alheekmahlib/#/quran?page=';
+  static const String berberTranslateUrlAssets = 
+      'https://holy-quran-tamazight.web.app/assets/';
 }

@@ -40,6 +40,9 @@ import 'package:rxdart/rxdart.dart' as R;
 import 'package:screenshot/screenshot.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+
+import 'controllers/extensions/audio/audio_continuous_mode.dart';
 
 import '/core/utils/constants/extensions/alignment_rotated_extension.dart';
 import '/core/utils/constants/extensions/bottom_sheet_extension.dart';

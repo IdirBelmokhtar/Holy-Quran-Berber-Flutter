@@ -32,14 +32,20 @@ class PlayButton extends StatelessWidget {
         AudioCtrl.instance.state.isDirectPlaying.value = false;
         debugPrint('SurahNum: $surahNum');
 
-        await QuranLibrary().playAyah(
-          context: Get.context!,
-          currentAyahUniqueNumber: ayahUQNum,
-          ayahAudioStyle: AudioCtrl.instance.ayahAudioStyle,
-          ayahDownloadManagerStyle: AudioCtrl.instance.ayahDownloadManagerStyle,
-          playSingleAyah: singleAyahOnly,
-          isDarkMode: ThemeController.instance.isDarkMode,
-        );
+        if (singleAyahOnly) {
+          // Trigger the custom continuous playback mechanism with lookahead downloads
+          await AudioCtrl.instance.playContinuousWithLookahead(Get.context!, ayahUQNum);
+        } else {
+          // Default full surah playback behaviour
+          await QuranLibrary().playAyah(
+            context: Get.context!,
+            currentAyahUniqueNumber: ayahUQNum,
+            ayahAudioStyle: AudioCtrl.instance.ayahAudioStyle,
+            ayahDownloadManagerStyle: AudioCtrl.instance.ayahDownloadManagerStyle,
+            playSingleAyah: false,
+            isDarkMode: ThemeController.instance.isDarkMode,
+          );
+        }
         if (cancel != null) {
           cancel!();
         }

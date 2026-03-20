@@ -1,4 +1,4 @@
-package com.alheekmah.alquranalkareem.alquranalkareem
+package com.quran.berber
 
 import android.app.PendingIntent
 import android.appwidget.AppWidgetManager

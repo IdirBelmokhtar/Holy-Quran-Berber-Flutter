@@ -75,30 +75,16 @@ extension ContextMenuExtension on BuildContext {
                 ),
                 const Gap(6),
                 this.vDivider(height: 18.0),
-                if (GetPlatform.isAndroid ||
-                    GetPlatform.isIOS ||
-                    GetPlatform.isMacOS) ...[
-                  // full surah playButton
-                  PlayButton(
-                    surahNum: surahNum,
-                    ayahNum: ayahNum,
-                    ayahUQNum: ayahUQNum,
-                    singleAyahOnly: true,
-                    cancel: cancel,
-                  ),
-                  const Gap(2),
-                  this.vDivider(height: 18.0),
-                ] else ...[
-                  // single ayah playButton for web/desktop
-                  PlayButton(
-                    surahNum: surahNum,
-                    ayahNum: ayahNum,
-                    ayahUQNum: ayahUQNum,
-                    cancel: cancel,
-                  ),
-                  const Gap(6),
-                  this.vDivider(height: 18.0),
-                ],
+                // single ayah playButton
+                PlayButton(
+                  surahNum: surahNum,
+                  ayahNum: ayahNum,
+                  ayahUQNum: ayahUQNum,
+                  singleAyahOnly: true,
+                  cancel: cancel,
+                ),
+                const Gap(6),
+                this.vDivider(height: 18.0),
                 const Gap(6),
                 AddBookmarkButton(
                   surahNum: surahNum,

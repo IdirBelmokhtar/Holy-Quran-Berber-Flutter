@@ -19,6 +19,7 @@ dependencies:
   background_fetch: ^1.5.0
   badges: ^3.1.2
   bot_toast: ^4.1.3
+  cached_network_image: ^3.4.1
   connectivity_plus: ^7.0.0
   cupertino_icons: ^1.0.8
   desktop_window: ^0.4.2
@@ -34,6 +35,7 @@ dependencies:
   flutter_app_info: ^3.0.3
   flutter_cache_manager: ^3.4.1
   flutter_launcher_icons: ^0.14.4
+  flutter_local_notifications: ^21.0.0
   flutter_localizations:
     sdk: flutter
   flutter_native_splash: ^2.4.7
@@ -60,10 +62,7 @@ dependencies:
   package_rename: ^1.10.1
   path: ^1.9.1
   path_provider: ^2.1.5
-  quran_library: ^2.2.6
-    # git:
-    #   ref: main
-    #   url: https://github.com/alheekmahlib/quran_library.git
+  quran_library: ^2.3.5
   rate_my_app: ^2.3.2
   read_more_less: ^1.0.1
   responsive_builder: ^0.7.1
@@ -113,18 +112,21 @@ package_rename_config:
     #   app_name: القرآن الكريم أمازيغية
     #   package_name: com.quran.berber2
 
-  # flutter_launcher_icons:
-  #   android: "launcher_icon"
-  #   ios: true
-  #   image_path: "assets/app_icon.png"
-  #   min_sdk_android: 21 # android min sdk min:16, default 21
-  #   windows:
-  #     generate: true
-  #     image_path: "assets/app_icon.png"
-  #     icon_size: 48 # min:48, max:256, default: 48
-  #   macos:
-  #     generate: true
-  #     image_path: "assets/app_icon.png"
+  flutter_launcher_icons:
+    android: true
+    ios: false
+    remove_alpha_ios: true # true to allow Icons with alpha channel in App Store.
+    image_path: "assets/splash_icon512.png"
+    adaptive_icon_background: "#254D32"
+    adaptive_icon_foreground: "assets/splash_icon512.png"
+    min_sdk_android: 21 # android min sdk min:16, default 21
+    # windows:
+    #   generate: true
+    #   image_path: "assets/app_icon.png"
+    #   icon_size: 48 # min:48, max:256, default: 48
+    # macos:
+    #   generate: true
+    #   image_path: "assets/app_icon.png"
   flutter_lints: ^5.0.0
 
 flutter_assets:
@@ -154,234 +156,235 @@ flutter:
     - assets/app_icon.png
     - assets/app_icon_mac.png
     - assets/json/azkar.json
-    - assets/translate_kabyle_image_hafs/translate_001/
-    - assets/translate_kabyle_image_hafs/translate_002/
-    - assets/translate_kabyle_image_hafs/translate_003/
-    - assets/translate_kabyle_image_hafs/translate_004/
-    - assets/translate_kabyle_image_hafs/translate_005/
-    - assets/translate_kabyle_image_hafs/translate_006/
-    - assets/translate_kabyle_image_hafs/translate_007/
-    - assets/translate_kabyle_image_hafs/translate_008/
-    - assets/translate_kabyle_image_hafs/translate_009/
-    - assets/translate_kabyle_image_hafs/translate_010/
-    - assets/translate_kabyle_image_hafs/translate_011/
-    - assets/translate_kabyle_image_hafs/translate_012/
-    - assets/translate_kabyle_image_hafs/translate_013/
-    - assets/translate_kabyle_image_hafs/translate_014/
-    - assets/translate_kabyle_image_hafs/translate_015/
-    - assets/translate_kabyle_image_hafs/translate_016/
-    - assets/translate_kabyle_image_hafs/translate_017/
-    - assets/translate_kabyle_image_hafs/translate_018/
-    - assets/translate_kabyle_image_hafs/translate_019/
-    - assets/translate_kabyle_image_hafs/translate_020/
-    - assets/translate_kabyle_image_hafs/translate_021/
-    - assets/translate_kabyle_image_hafs/translate_022/
-    - assets/translate_kabyle_image_hafs/translate_023/
-    - assets/translate_kabyle_image_hafs/translate_024/
-    - assets/translate_kabyle_image_hafs/translate_025/
-    - assets/translate_kabyle_image_hafs/translate_026/
-    - assets/translate_kabyle_image_hafs/translate_027/
-    - assets/translate_kabyle_image_hafs/translate_028/
-    - assets/translate_kabyle_image_hafs/translate_029/
-    - assets/translate_kabyle_image_hafs/translate_030/
-    - assets/translate_kabyle_image_hafs/translate_031/
-    - assets/translate_kabyle_image_hafs/translate_032/
-    - assets/translate_kabyle_image_hafs/translate_033/
-    - assets/translate_kabyle_image_hafs/translate_034/
-    - assets/translate_kabyle_image_hafs/translate_035/
-    - assets/translate_kabyle_image_hafs/translate_036/
-    - assets/translate_kabyle_image_hafs/translate_037/
-    - assets/translate_kabyle_image_hafs/translate_038/
-    - assets/translate_kabyle_image_hafs/translate_039/
-    - assets/translate_kabyle_image_hafs/translate_040/
-    - assets/translate_kabyle_image_hafs/translate_041/
-    - assets/translate_kabyle_image_hafs/translate_042/
-    - assets/translate_kabyle_image_hafs/translate_043/
-    - assets/translate_kabyle_image_hafs/translate_044/
-    - assets/translate_kabyle_image_hafs/translate_045/
-    - assets/translate_kabyle_image_hafs/translate_046/
-    - assets/translate_kabyle_image_hafs/translate_047/
-    - assets/translate_kabyle_image_hafs/translate_048/
-    - assets/translate_kabyle_image_hafs/translate_049/
-    - assets/translate_kabyle_image_hafs/translate_050/
-    - assets/translate_kabyle_image_hafs/translate_051/
-    - assets/translate_kabyle_image_hafs/translate_052/
-    - assets/translate_kabyle_image_hafs/translate_053/
-    - assets/translate_kabyle_image_hafs/translate_054/
-    - assets/translate_kabyle_image_hafs/translate_055/
-    - assets/translate_kabyle_image_hafs/translate_056/
-    - assets/translate_kabyle_image_hafs/translate_057/
-    - assets/translate_kabyle_image_hafs/translate_058/
-    - assets/translate_kabyle_image_hafs/translate_059/
-    - assets/translate_kabyle_image_hafs/translate_060/
-    - assets/translate_kabyle_image_hafs/translate_061/
-    - assets/translate_kabyle_image_hafs/translate_062/
-    - assets/translate_kabyle_image_hafs/translate_063/
-    - assets/translate_kabyle_image_hafs/translate_064/
-    - assets/translate_kabyle_image_hafs/translate_065/
-    - assets/translate_kabyle_image_hafs/translate_066/
-    - assets/translate_kabyle_image_hafs/translate_067/
-    - assets/translate_kabyle_image_hafs/translate_068/
-    - assets/translate_kabyle_image_hafs/translate_069/
-    - assets/translate_kabyle_image_hafs/translate_070/
-    - assets/translate_kabyle_image_hafs/translate_071/
-    - assets/translate_kabyle_image_hafs/translate_072/
-    - assets/translate_kabyle_image_hafs/translate_073/
-    - assets/translate_kabyle_image_hafs/translate_074/
-    - assets/translate_kabyle_image_hafs/translate_075/
-    - assets/translate_kabyle_image_hafs/translate_076/
-    - assets/translate_kabyle_image_hafs/translate_077/
-    - assets/translate_kabyle_image_hafs/translate_078/
-    - assets/translate_kabyle_image_hafs/translate_079/
-    - assets/translate_kabyle_image_hafs/translate_080/
-    - assets/translate_kabyle_image_hafs/translate_081/
-    - assets/translate_kabyle_image_hafs/translate_082/
-    - assets/translate_kabyle_image_hafs/translate_083/
-    - assets/translate_kabyle_image_hafs/translate_084/
-    - assets/translate_kabyle_image_hafs/translate_085/
-    - assets/translate_kabyle_image_hafs/translate_086/
-    - assets/translate_kabyle_image_hafs/translate_087/
-    - assets/translate_kabyle_image_hafs/translate_088/
-    - assets/translate_kabyle_image_hafs/translate_089/
-    - assets/translate_kabyle_image_hafs/translate_090/
-    - assets/translate_kabyle_image_hafs/translate_091/
-    - assets/translate_kabyle_image_hafs/translate_092/
-    - assets/translate_kabyle_image_hafs/translate_093/
-    - assets/translate_kabyle_image_hafs/translate_094/
-    - assets/translate_kabyle_image_hafs/translate_095/
-    - assets/translate_kabyle_image_hafs/translate_096/
-    - assets/translate_kabyle_image_hafs/translate_097/
-    - assets/translate_kabyle_image_hafs/translate_098/
-    - assets/translate_kabyle_image_hafs/translate_099/
-    - assets/translate_kabyle_image_hafs/translate_100/
-    - assets/translate_kabyle_image_hafs/translate_101/
-    - assets/translate_kabyle_image_hafs/translate_102/
-    - assets/translate_kabyle_image_hafs/translate_103/
-    - assets/translate_kabyle_image_hafs/translate_104/
-    - assets/translate_kabyle_image_hafs/translate_105/
-    - assets/translate_kabyle_image_hafs/translate_106/
-    - assets/translate_kabyle_image_hafs/translate_107/
-    - assets/translate_kabyle_image_hafs/translate_108/
-    - assets/translate_kabyle_image_hafs/translate_109/
-    - assets/translate_kabyle_image_hafs/translate_110/
-    - assets/translate_kabyle_image_hafs/translate_111/
-    - assets/translate_kabyle_image_hafs/translate_112/
-    - assets/translate_kabyle_image_hafs/translate_113/
-    - assets/translate_kabyle_image_hafs/translate_114/
-    - assets/translate_kabyle_voix_hafs/001/
-    - assets/translate_kabyle_voix_hafs/002/
-    - assets/translate_kabyle_voix_hafs/003/
-    - assets/translate_kabyle_voix_hafs/004/
-    - assets/translate_kabyle_voix_hafs/005/
-    - assets/translate_kabyle_voix_hafs/006/
-    - assets/translate_kabyle_voix_hafs/007/
-    - assets/translate_kabyle_voix_hafs/008/
-    - assets/translate_kabyle_voix_hafs/009/
-    - assets/translate_kabyle_voix_hafs/010/
-    - assets/translate_kabyle_voix_hafs/011/
-    - assets/translate_kabyle_voix_hafs/012/
-    - assets/translate_kabyle_voix_hafs/013/
-    - assets/translate_kabyle_voix_hafs/014/
-    - assets/translate_kabyle_voix_hafs/015/
-    - assets/translate_kabyle_voix_hafs/016/
-    - assets/translate_kabyle_voix_hafs/017/
-    - assets/translate_kabyle_voix_hafs/018/
-    - assets/translate_kabyle_voix_hafs/019/
-    - assets/translate_kabyle_voix_hafs/020/
-    - assets/translate_kabyle_voix_hafs/021/
-    - assets/translate_kabyle_voix_hafs/022/
-    - assets/translate_kabyle_voix_hafs/023/
-    - assets/translate_kabyle_voix_hafs/024/
-    - assets/translate_kabyle_voix_hafs/025/
-    - assets/translate_kabyle_voix_hafs/026/
-    - assets/translate_kabyle_voix_hafs/027/
-    - assets/translate_kabyle_voix_hafs/028/
-    - assets/translate_kabyle_voix_hafs/029/
-    - assets/translate_kabyle_voix_hafs/030/
-    - assets/translate_kabyle_voix_hafs/031/
-    - assets/translate_kabyle_voix_hafs/032/
-    - assets/translate_kabyle_voix_hafs/033/
-    - assets/translate_kabyle_voix_hafs/034/
-    - assets/translate_kabyle_voix_hafs/035/
-    - assets/translate_kabyle_voix_hafs/036/
-    - assets/translate_kabyle_voix_hafs/037/
-    - assets/translate_kabyle_voix_hafs/038/
-    - assets/translate_kabyle_voix_hafs/039/
-    - assets/translate_kabyle_voix_hafs/040/
-    - assets/translate_kabyle_voix_hafs/041/
-    - assets/translate_kabyle_voix_hafs/042/
-    - assets/translate_kabyle_voix_hafs/043/
-    - assets/translate_kabyle_voix_hafs/044/
-    - assets/translate_kabyle_voix_hafs/045/
-    - assets/translate_kabyle_voix_hafs/046/
-    - assets/translate_kabyle_voix_hafs/047/
-    - assets/translate_kabyle_voix_hafs/048/
-    - assets/translate_kabyle_voix_hafs/049/
-    - assets/translate_kabyle_voix_hafs/050/
-    - assets/translate_kabyle_voix_hafs/051/
-    - assets/translate_kabyle_voix_hafs/052/
-    - assets/translate_kabyle_voix_hafs/053/
-    - assets/translate_kabyle_voix_hafs/054/
-    - assets/translate_kabyle_voix_hafs/055/
-    - assets/translate_kabyle_voix_hafs/056/
-    - assets/translate_kabyle_voix_hafs/057/
-    - assets/translate_kabyle_voix_hafs/058/
-    - assets/translate_kabyle_voix_hafs/059/
-    - assets/translate_kabyle_voix_hafs/060/
-    - assets/translate_kabyle_voix_hafs/061/
-    - assets/translate_kabyle_voix_hafs/062/
-    - assets/translate_kabyle_voix_hafs/063/
-    - assets/translate_kabyle_voix_hafs/064/
-    - assets/translate_kabyle_voix_hafs/065/
-    - assets/translate_kabyle_voix_hafs/066/
-    - assets/translate_kabyle_voix_hafs/067/
-    - assets/translate_kabyle_voix_hafs/068/
-    - assets/translate_kabyle_voix_hafs/069/
-    - assets/translate_kabyle_voix_hafs/070/
-    - assets/translate_kabyle_voix_hafs/071/
-    - assets/translate_kabyle_voix_hafs/072/
-    - assets/translate_kabyle_voix_hafs/073/
-    - assets/translate_kabyle_voix_hafs/074/
-    - assets/translate_kabyle_voix_hafs/075/
-    - assets/translate_kabyle_voix_hafs/076/
-    - assets/translate_kabyle_voix_hafs/077/
-    - assets/translate_kabyle_voix_hafs/078/
-    - assets/translate_kabyle_voix_hafs/079/
-    - assets/translate_kabyle_voix_hafs/080/
-    - assets/translate_kabyle_voix_hafs/081/
-    - assets/translate_kabyle_voix_hafs/082/
-    - assets/translate_kabyle_voix_hafs/083/
-    - assets/translate_kabyle_voix_hafs/084/
-    - assets/translate_kabyle_voix_hafs/085/
-    - assets/translate_kabyle_voix_hafs/086/
-    - assets/translate_kabyle_voix_hafs/087/
-    - assets/translate_kabyle_voix_hafs/088/
-    - assets/translate_kabyle_voix_hafs/089/
-    - assets/translate_kabyle_voix_hafs/090/
-    - assets/translate_kabyle_voix_hafs/091/
-    - assets/translate_kabyle_voix_hafs/092/
-    - assets/translate_kabyle_voix_hafs/093/
-    - assets/translate_kabyle_voix_hafs/094/
-    - assets/translate_kabyle_voix_hafs/095/
-    - assets/translate_kabyle_voix_hafs/096/
-    - assets/translate_kabyle_voix_hafs/097/
-    - assets/translate_kabyle_voix_hafs/098/
-    - assets/translate_kabyle_voix_hafs/099/
-    - assets/translate_kabyle_voix_hafs/100/
-    - assets/translate_kabyle_voix_hafs/101/
-    - assets/translate_kabyle_voix_hafs/102/
-    - assets/translate_kabyle_voix_hafs/103/
-    - assets/translate_kabyle_voix_hafs/104/
-    - assets/translate_kabyle_voix_hafs/105/
-    - assets/translate_kabyle_voix_hafs/106/
-    - assets/translate_kabyle_voix_hafs/107/
-    - assets/translate_kabyle_voix_hafs/108/
-    - assets/translate_kabyle_voix_hafs/109/
-    - assets/translate_kabyle_voix_hafs/110/
-    - assets/translate_kabyle_voix_hafs/111/
-    - assets/translate_kabyle_voix_hafs/112/
-    - assets/translate_kabyle_voix_hafs/113/
-    - assets/translate_kabyle_voix_hafs/114/
+
+    - assets/data/translate_kabyle_image_hafs/translate_001/
+    - assets/data/translate_kabyle_image_hafs/translate_002/
+    - assets/data/translate_kabyle_image_hafs/translate_003/
+    - assets/data/translate_kabyle_image_hafs/translate_004/
+    - assets/data/translate_kabyle_image_hafs/translate_005/
+    - assets/data/translate_kabyle_image_hafs/translate_006/
+    - assets/data/translate_kabyle_image_hafs/translate_007/
+    - assets/data/translate_kabyle_image_hafs/translate_008/
+    - assets/data/translate_kabyle_image_hafs/translate_009/
+    - assets/data/translate_kabyle_image_hafs/translate_010/
+    - assets/data/translate_kabyle_image_hafs/translate_011/
+    - assets/data/translate_kabyle_image_hafs/translate_012/
+    - assets/data/translate_kabyle_image_hafs/translate_013/
+    - assets/data/translate_kabyle_image_hafs/translate_014/
+    - assets/data/translate_kabyle_image_hafs/translate_015/
+    - assets/data/translate_kabyle_image_hafs/translate_016/
+    - assets/data/translate_kabyle_image_hafs/translate_017/
+    - assets/data/translate_kabyle_image_hafs/translate_018/
+    - assets/data/translate_kabyle_image_hafs/translate_019/
+    - assets/data/translate_kabyle_image_hafs/translate_020/
+    - assets/data/translate_kabyle_image_hafs/translate_021/
+    - assets/data/translate_kabyle_image_hafs/translate_022/
+    - assets/data/translate_kabyle_image_hafs/translate_023/
+    - assets/data/translate_kabyle_image_hafs/translate_024/
+    - assets/data/translate_kabyle_image_hafs/translate_025/
+    - assets/data/translate_kabyle_image_hafs/translate_026/
+    - assets/data/translate_kabyle_image_hafs/translate_027/
+    - assets/data/translate_kabyle_image_hafs/translate_028/
+    - assets/data/translate_kabyle_image_hafs/translate_029/
+    - assets/data/translate_kabyle_image_hafs/translate_030/
+    - assets/data/translate_kabyle_image_hafs/translate_031/
+    - assets/data/translate_kabyle_image_hafs/translate_032/
+    - assets/data/translate_kabyle_image_hafs/translate_033/
+    - assets/data/translate_kabyle_image_hafs/translate_034/
+    - assets/data/translate_kabyle_image_hafs/translate_035/
+    - assets/data/translate_kabyle_image_hafs/translate_036/
+    - assets/data/translate_kabyle_image_hafs/translate_037/
+    - assets/data/translate_kabyle_image_hafs/translate_038/
+    - assets/data/translate_kabyle_image_hafs/translate_039/
+    - assets/data/translate_kabyle_image_hafs/translate_040/
+    - assets/data/translate_kabyle_image_hafs/translate_041/
+    - assets/data/translate_kabyle_image_hafs/translate_042/
+    - assets/data/translate_kabyle_image_hafs/translate_043/
+    - assets/data/translate_kabyle_image_hafs/translate_044/
+    - assets/data/translate_kabyle_image_hafs/translate_045/
+    - assets/data/translate_kabyle_image_hafs/translate_046/
+    - assets/data/translate_kabyle_image_hafs/translate_047/
+    - assets/data/translate_kabyle_image_hafs/translate_048/
+    - assets/data/translate_kabyle_image_hafs/translate_049/
+    - assets/data/translate_kabyle_image_hafs/translate_050/
+    - assets/data/translate_kabyle_image_hafs/translate_051/
+    - assets/data/translate_kabyle_image_hafs/translate_052/
+    - assets/data/translate_kabyle_image_hafs/translate_053/
+    - assets/data/translate_kabyle_image_hafs/translate_054/
+    - assets/data/translate_kabyle_image_hafs/translate_055/
+    - assets/data/translate_kabyle_image_hafs/translate_056/
+    - assets/data/translate_kabyle_image_hafs/translate_057/
+    - assets/data/translate_kabyle_image_hafs/translate_058/
+    - assets/data/translate_kabyle_image_hafs/translate_059/
+    - assets/data/translate_kabyle_image_hafs/translate_060/
+    - assets/data/translate_kabyle_image_hafs/translate_061/
+    - assets/data/translate_kabyle_image_hafs/translate_062/
+    - assets/data/translate_kabyle_image_hafs/translate_063/
+    - assets/data/translate_kabyle_image_hafs/translate_064/
+    - assets/data/translate_kabyle_image_hafs/translate_065/
+    - assets/data/translate_kabyle_image_hafs/translate_066/
+    - assets/data/translate_kabyle_image_hafs/translate_067/
+    - assets/data/translate_kabyle_image_hafs/translate_068/
+    - assets/data/translate_kabyle_image_hafs/translate_069/
+    - assets/data/translate_kabyle_image_hafs/translate_070/
+    - assets/data/translate_kabyle_image_hafs/translate_071/
+    - assets/data/translate_kabyle_image_hafs/translate_072/
+    - assets/data/translate_kabyle_image_hafs/translate_073/
+    - assets/data/translate_kabyle_image_hafs/translate_074/
+    - assets/data/translate_kabyle_image_hafs/translate_075/
+    - assets/data/translate_kabyle_image_hafs/translate_076/
+    - assets/data/translate_kabyle_image_hafs/translate_077/
+    - assets/data/translate_kabyle_image_hafs/translate_078/
+    - assets/data/translate_kabyle_image_hafs/translate_079/
+    - assets/data/translate_kabyle_image_hafs/translate_080/
+    - assets/data/translate_kabyle_image_hafs/translate_081/
+    - assets/data/translate_kabyle_image_hafs/translate_082/
+    - assets/data/translate_kabyle_image_hafs/translate_083/
+    - assets/data/translate_kabyle_image_hafs/translate_084/
+    - assets/data/translate_kabyle_image_hafs/translate_085/
+    - assets/data/translate_kabyle_image_hafs/translate_086/
+    - assets/data/translate_kabyle_image_hafs/translate_087/
+    - assets/data/translate_kabyle_image_hafs/translate_088/
+    - assets/data/translate_kabyle_image_hafs/translate_089/
+    - assets/data/translate_kabyle_image_hafs/translate_090/
+    - assets/data/translate_kabyle_image_hafs/translate_091/
+    - assets/data/translate_kabyle_image_hafs/translate_092/
+    - assets/data/translate_kabyle_image_hafs/translate_093/
+    - assets/data/translate_kabyle_image_hafs/translate_094/
+    - assets/data/translate_kabyle_image_hafs/translate_095/
+    - assets/data/translate_kabyle_image_hafs/translate_096/
+    - assets/data/translate_kabyle_image_hafs/translate_097/
+    - assets/data/translate_kabyle_image_hafs/translate_098/
+    - assets/data/translate_kabyle_image_hafs/translate_099/
+    - assets/data/translate_kabyle_image_hafs/translate_100/
+    - assets/data/translate_kabyle_image_hafs/translate_101/
+    - assets/data/translate_kabyle_image_hafs/translate_102/
+    - assets/data/translate_kabyle_image_hafs/translate_103/
+    - assets/data/translate_kabyle_image_hafs/translate_104/
+    - assets/data/translate_kabyle_image_hafs/translate_105/
+    - assets/data/translate_kabyle_image_hafs/translate_106/
+    - assets/data/translate_kabyle_image_hafs/translate_107/
+    - assets/data/translate_kabyle_image_hafs/translate_108/
+    - assets/data/translate_kabyle_image_hafs/translate_109/
+    - assets/data/translate_kabyle_image_hafs/translate_110/
+    - assets/data/translate_kabyle_image_hafs/translate_111/
+    - assets/data/translate_kabyle_image_hafs/translate_112/
+    - assets/data/translate_kabyle_image_hafs/translate_113/
+    - assets/data/translate_kabyle_image_hafs/translate_114/
+    - assets/data/translate_kabyle_voix_hafs/001/
+    - assets/data/translate_kabyle_voix_hafs/002/
+    - assets/data/translate_kabyle_voix_hafs/003/
+    - assets/data/translate_kabyle_voix_hafs/004/
+    - assets/data/translate_kabyle_voix_hafs/005/
+    - assets/data/translate_kabyle_voix_hafs/006/
+    - assets/data/translate_kabyle_voix_hafs/007/
+    - assets/data/translate_kabyle_voix_hafs/008/
+    - assets/data/translate_kabyle_voix_hafs/009/
+    - assets/data/translate_kabyle_voix_hafs/010/
+    - assets/data/translate_kabyle_voix_hafs/011/
+    - assets/data/translate_kabyle_voix_hafs/012/
+    - assets/data/translate_kabyle_voix_hafs/013/
+    - assets/data/translate_kabyle_voix_hafs/014/
+    - assets/data/translate_kabyle_voix_hafs/015/
+    - assets/data/translate_kabyle_voix_hafs/016/
+    - assets/data/translate_kabyle_voix_hafs/017/
+    - assets/data/translate_kabyle_voix_hafs/018/
+    - assets/data/translate_kabyle_voix_hafs/019/
+    - assets/data/translate_kabyle_voix_hafs/020/
+    - assets/data/translate_kabyle_voix_hafs/021/
+    - assets/data/translate_kabyle_voix_hafs/022/
+    - assets/data/translate_kabyle_voix_hafs/023/
+    - assets/data/translate_kabyle_voix_hafs/024/
+    - assets/data/translate_kabyle_voix_hafs/025/
+    - assets/data/translate_kabyle_voix_hafs/026/
+    - assets/data/translate_kabyle_voix_hafs/027/
+    - assets/data/translate_kabyle_voix_hafs/028/
+    - assets/data/translate_kabyle_voix_hafs/029/
+    - assets/data/translate_kabyle_voix_hafs/030/
+    - assets/data/translate_kabyle_voix_hafs/031/
+    - assets/data/translate_kabyle_voix_hafs/032/
+    - assets/data/translate_kabyle_voix_hafs/033/
+    - assets/data/translate_kabyle_voix_hafs/034/
+    - assets/data/translate_kabyle_voix_hafs/035/
+    - assets/data/translate_kabyle_voix_hafs/036/
+    - assets/data/translate_kabyle_voix_hafs/037/
+    - assets/data/translate_kabyle_voix_hafs/038/
+    - assets/data/translate_kabyle_voix_hafs/039/
+    - assets/data/translate_kabyle_voix_hafs/040/
+    - assets/data/translate_kabyle_voix_hafs/041/
+    - assets/data/translate_kabyle_voix_hafs/042/
+    - assets/data/translate_kabyle_voix_hafs/043/
+    - assets/data/translate_kabyle_voix_hafs/044/
+    - assets/data/translate_kabyle_voix_hafs/045/
+    - assets/data/translate_kabyle_voix_hafs/046/
+    - assets/data/translate_kabyle_voix_hafs/047/
+    - assets/data/translate_kabyle_voix_hafs/048/
+    - assets/data/translate_kabyle_voix_hafs/049/
+    - assets/data/translate_kabyle_voix_hafs/050/
+    - assets/data/translate_kabyle_voix_hafs/051/
+    - assets/data/translate_kabyle_voix_hafs/052/
+    - assets/data/translate_kabyle_voix_hafs/053/
+    - assets/data/translate_kabyle_voix_hafs/054/
+    - assets/data/translate_kabyle_voix_hafs/055/
+    - assets/data/translate_kabyle_voix_hafs/056/
+    - assets/data/translate_kabyle_voix_hafs/057/
+    - assets/data/translate_kabyle_voix_hafs/058/
+    - assets/data/translate_kabyle_voix_hafs/059/
+    - assets/data/translate_kabyle_voix_hafs/060/
+    - assets/data/translate_kabyle_voix_hafs/061/
+    - assets/data/translate_kabyle_voix_hafs/062/
+    - assets/data/translate_kabyle_voix_hafs/063/
+    - assets/data/translate_kabyle_voix_hafs/064/
+    - assets/data/translate_kabyle_voix_hafs/065/
+    - assets/data/translate_kabyle_voix_hafs/066/
+    - assets/data/translate_kabyle_voix_hafs/067/
+    - assets/data/translate_kabyle_voix_hafs/068/
+    - assets/data/translate_kabyle_voix_hafs/069/
+    - assets/data/translate_kabyle_voix_hafs/070/
+    - assets/data/translate_kabyle_voix_hafs/071/
+    - assets/data/translate_kabyle_voix_hafs/072/
+    - assets/data/translate_kabyle_voix_hafs/073/
+    - assets/data/translate_kabyle_voix_hafs/074/
+    - assets/data/translate_kabyle_voix_hafs/075/
+    - assets/data/translate_kabyle_voix_hafs/076/
+    - assets/data/translate_kabyle_voix_hafs/077/
+    - assets/data/translate_kabyle_voix_hafs/078/
+    - assets/data/translate_kabyle_voix_hafs/079/
+    - assets/data/translate_kabyle_voix_hafs/080/
+    - assets/data/translate_kabyle_voix_hafs/081/
+    - assets/data/translate_kabyle_voix_hafs/082/
+    - assets/data/translate_kabyle_voix_hafs/083/
+    - assets/data/translate_kabyle_voix_hafs/084/
+    - assets/data/translate_kabyle_voix_hafs/085/
+    - assets/data/translate_kabyle_voix_hafs/086/
+    - assets/data/translate_kabyle_voix_hafs/087/
+    - assets/data/translate_kabyle_voix_hafs/088/
+    - assets/data/translate_kabyle_voix_hafs/089/
+    - assets/data/translate_kabyle_voix_hafs/090/
+    - assets/data/translate_kabyle_voix_hafs/091/
+    - assets/data/translate_kabyle_voix_hafs/092/
+    - assets/data/translate_kabyle_voix_hafs/093/
+    - assets/data/translate_kabyle_voix_hafs/094/
+    - assets/data/translate_kabyle_voix_hafs/095/
+    - assets/data/translate_kabyle_voix_hafs/096/
+    - assets/data/translate_kabyle_voix_hafs/097/
+    - assets/data/translate_kabyle_voix_hafs/098/
+    - assets/data/translate_kabyle_voix_hafs/099/
+    - assets/data/translate_kabyle_voix_hafs/100/
+    - assets/data/translate_kabyle_voix_hafs/101/
+    - assets/data/translate_kabyle_voix_hafs/102/
+    - assets/data/translate_kabyle_voix_hafs/103/
+    - assets/data/translate_kabyle_voix_hafs/104/
+    - assets/data/translate_kabyle_voix_hafs/105/
+    - assets/data/translate_kabyle_voix_hafs/106/
+    - assets/data/translate_kabyle_voix_hafs/107/
+    - assets/data/translate_kabyle_voix_hafs/108/
+    - assets/data/translate_kabyle_voix_hafs/109/
+    - assets/data/translate_kabyle_voix_hafs/110/
+    - assets/data/translate_kabyle_voix_hafs/111/
+    - assets/data/translate_kabyle_voix_hafs/112/
+    - assets/data/translate_kabyle_voix_hafs/113/
+    - assets/data/translate_kabyle_voix_hafs/114/
 
   fonts:
     - family: uthmanic
