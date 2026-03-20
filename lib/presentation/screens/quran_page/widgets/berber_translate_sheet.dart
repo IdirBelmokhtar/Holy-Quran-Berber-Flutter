@@ -57,7 +57,7 @@ class _BerberTranslateSheetState extends State<BerberTranslateSheet> {
   String _imagePath(int surah, int ayah, int part) {
     final s = surah.toString().padLeft(3, '0');
     final a = ayah.toString().padLeft(3, '0');
-    return 'assets/data/translate_kabyle_image_hafs/translate_$s/${a}_$part.jpg';
+    return GetPlatform.isWeb ? 'assets/data/translate_kabyle_image_hafs/translate_$s/${a}_$part.jpg' : ApiConstants.berberTranslateUrlAssets + 'assets/data/translate_kabyle_image_hafs/translate_$s/${a}_$part.jpg';
   }
 
   String _audioPath(int surah, int ayah) {
@@ -408,8 +408,8 @@ class _BerberTranslateSheetState extends State<BerberTranslateSheet> {
                         _buildAudioButton(),
 
                         // Berber translation images — RTL flowing text with transparent BG
-                        GetPlatform.isWeb
-                            ? Directionality(
+                        GetPlatform.isWeb ?
+                              Directionality(
                                 textDirection: TextDirection.rtl,
                                 child: Wrap(
                                   direction: Axis.horizontal,

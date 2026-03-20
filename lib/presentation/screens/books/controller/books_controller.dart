@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:flutter/foundation.dart' show kIsWeb;
+
 import 'package:alquranalkareem/core/utils/constants/extensions/custom_error_snackBar.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/services.dart' show rootBundle;
@@ -65,6 +67,10 @@ class BooksController extends GetxController {
   }
 
   Future<void> downloadBook(int bookNumber) async {
+    if (kIsWeb) {
+      Get.context!.showCustomErrorSnackBar('downloadNotAvailableOnWeb'.tr);
+      return;
+    }
     if (ConnectivityService.instance.noConnection.value) {
       return Get.context!.showCustomErrorSnackBar('noInternet'.tr);
     } else {
@@ -118,6 +124,7 @@ class BooksController extends GetxController {
   }
 
   Future<int> getChapterStartPage(int bookNumber, String chapterName) async {
+    if (kIsWeb) return 0;
     try {
       final directory = await getApplicationDocumentsDirectory();
       final file = File('${directory.path}/$bookNumber.json');
@@ -153,6 +160,7 @@ class BooksController extends GetxController {
   }
 
   Future<List<PageContent>> getPages(int bookNumber) async {
+    if (kIsWeb) return [];
     try {
       final directory = await getApplicationDocumentsDirectory();
       final file = File('${directory.path}/$bookNumber.json');

@@ -1,6 +1,8 @@
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:flutter/foundation.dart' show kIsWeb;
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -47,6 +49,7 @@ extension BooksUi on BooksController {
   }
 
   Future<void> deleteBook(int bookNumber) async {
+    if (kIsWeb) return;
     try {
       final directory = await getApplicationDocumentsDirectory();
       final file = File('${directory.path}/$bookNumber.json');

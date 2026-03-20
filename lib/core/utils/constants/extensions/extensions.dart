@@ -1,4 +1,6 @@
-import 'dart:io';
+import 'dart:io' show Platform;
+
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 import 'package:alquranalkareem/core/utils/constants/svg_constants.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +14,9 @@ extension ContextExtensions on BuildContext {
   }
 
   dynamic definePlatform(var p1, var p2) =>
-      (Platform.isIOS || Platform.isAndroid || Platform.isFuchsia) ? p1 : p2;
+      !kIsWeb && (Platform.isIOS || Platform.isAndroid || Platform.isFuchsia)
+          ? p1
+          : p2;
 
   /// Gradient fading vertical divider
   Widget vDivider({double? height, Color? color}) {
