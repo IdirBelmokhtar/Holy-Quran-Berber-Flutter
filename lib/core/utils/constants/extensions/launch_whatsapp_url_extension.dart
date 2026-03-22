@@ -1,8 +1,8 @@
 import 'package:url_launcher/url_launcher.dart';
 
-extension LaunchAlheekmahUrlExtension on void {
-  Future<void> launchAlheekmahUrl() async {
-    String uri = 'https://www.facebook.com/idir.belmokhtar/';
+extension LaunchWhatsappUrlExtension on void {
+  Future<void> launchWhatsappUrl() async {
+    String uri = 'https://wa.me/213556109446';
     if (await canLaunchUrl(Uri.parse(uri))) {
       await launchUrl(Uri.parse(uri));
     } else {

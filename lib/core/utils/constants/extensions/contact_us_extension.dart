@@ -16,7 +16,7 @@ extension ContactUsExtension on void {
         '''-----------------------------------\n'''
         '''$stringText\n\n\n''';
     String uri =
-        'mailto:haozo89@gmail.com?subject=${Uri.encodeComponent(info.package.appName)}&body=${Uri.encodeComponent(text)}';
+        'mailto:belmokhtaridir@gmail.com?subject=${Uri.encodeComponent(info.package.appName)}&body=${Uri.encodeComponent(text)}';
     if (await canLaunchUrl(Uri.parse(uri))) {
       await launchUrl(Uri.parse(uri));
     } else {

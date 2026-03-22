@@ -18,6 +18,12 @@ class AppConstants {
       appLang: 'لغة التطبيق',
     ),
     LanguageModel(
+      languageName: 'Français',
+      countryCode: 'FR',
+      languageCode: 'fr',
+      appLang: 'Langue de l\'application',
+    ),
+    LanguageModel(
       languageName: 'Español',
       countryCode: '',
       languageCode: 'es',

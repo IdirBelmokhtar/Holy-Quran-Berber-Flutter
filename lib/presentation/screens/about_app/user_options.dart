@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
 import '/core/utils/constants/extensions/contact_us_extension.dart';
 import '/core/utils/constants/extensions/launch_alheekmah_url_extension.dart';
+import '/core/utils/constants/extensions/launch_linkedin_url_extension.dart';
+import '/core/utils/constants/extensions/launch_whatsapp_url_extension.dart';
 import '/core/utils/constants/extensions/share_app_extension.dart';
 import '../../../core/widgets/container_with_border.dart';
 
@@ -77,8 +80,8 @@ class UserOptions extends StatelessWidget {
               onTap: () => launchAlheekmahUrl(),
               child: Row(
                 children: [
-                  Icon(
-                    Icons.facebook_rounded,
+                  FaIcon(
+                    FontAwesomeIcons.facebook,
                     color: Theme.of(context).hintColor,
                     size: 22,
                   ),
@@ -90,6 +93,62 @@ class UserOptions extends StatelessWidget {
                   ),
                   Text(
                     'facebook'.tr,
+                    style: TextStyle(
+                      color: Theme.of(context).hintColor,
+                      fontFamily: 'kufi',
+                      fontStyle: FontStyle.italic,
+                      fontSize: 14,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const Divider(),
+            InkWell(
+              onTap: () => launchLinkedinUrl(),
+              child: Row(
+                children: [
+                  FaIcon(
+                    FontAwesomeIcons.linkedin,
+                    color: Theme.of(context).hintColor,
+                    size: 22,
+                  ),
+                  Container(
+                    width: 2,
+                    height: 20,
+                    margin: const EdgeInsets.symmetric(horizontal: 8),
+                    color: Theme.of(context).colorScheme.surface,
+                  ),
+                  Text(
+                    'LinkedIn',
+                    style: TextStyle(
+                      color: Theme.of(context).hintColor,
+                      fontFamily: 'kufi',
+                      fontStyle: FontStyle.italic,
+                      fontSize: 14,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const Divider(),
+            InkWell(
+              onTap: () => launchWhatsappUrl(),
+              child: Row(
+                children: [
+                  FaIcon(
+                    FontAwesomeIcons.whatsapp,
+                    color: Theme.of(context).hintColor,
+                    size: 22,
+                  ),
+                  Container(
+                    width: 2,
+                    height: 20,
+                    margin: const EdgeInsets.symmetric(horizontal: 8),
+                    color: Theme.of(context).colorScheme.surface,
+                  ),
+                  Text(
+                    'WhatsApp',
                     style: TextStyle(
                       color: Theme.of(context).hintColor,
                       fontFamily: 'kufi',
