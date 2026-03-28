@@ -16,7 +16,7 @@
 
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="حمّل تطبيق القرآن الكريم بالأمازيغية - أول تطبيق للقرآن الكريم باللغة الأمازيغية (القبائلية) على متجر Play Store و App Store!">
+  <meta name="description" content="حمّل تطبيق القرآن الكريم بالأمازيغية - أولأولأول تطبيق للقرآن الكريم باللغة الأمازيغية (القبائلية) على متجر Play Store و App Store!">
 
   <!-- iOS meta tags & icons -->
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -55,95 +55,70 @@
   
   
   <style id="splash-screen-style">
-    html {
-      height: 100%
+    :root {
+      --primary-color: #254D32;
+      --bg-color: #254D32;
+      --bg-color-dark: #2d2d2d;
     }
 
-    body {
+    html, body {
+      height: 100%;
       margin: 0;
-      min-height: 100%;
-      background-color: #254D32;
-          background-size: 100% 100%;
-    }
-
-    .center {
-      margin: 0;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      -ms-transform: translate(-50%, -50%);
-      transform: translate(-50%, -50%);
-    }
-
-    .contain {
-      display:block;
-      width:100%; height:100%;
-      object-fit: contain;
-    }
-
-    .stretch {
-      display:block;
-      width:100%; height:100%;
-    }
-
-    .cover {
-      display:block;
-      width:100%; height:100%;
-      object-fit: cover;
-    }
-
-    .bottom {
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      -ms-transform: translate(-50%, 0);
-      transform: translate(-50%, 0);
-    }
-
-    .bottomLeft {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-    }
-
-    .bottomRight {
-      position: absolute;
-      bottom: 0;
-      right: 0;
+      background-color: var(--bg-color);
     }
 
     @media (prefers-color-scheme: dark) {
       body {
-        background-color: #2d2d2d;
-          }
+        background-color: var(--bg-color-dark);
+      }
+    }
+
+    #splash-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 999;
+      transition: opacity 0.5s ease;
+    }
+
+    #splash img {
+      width: auto;
+      height: auto;
+      max-width: 70vw;
+      max-height: 35vh;
+      object-fit: contain;
+      animation: pulse 2s ease-in-out infinite;
     }
 
     /* ── Loading animation ── */
     @keyframes pulse {
-      0%, 100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-      50% { opacity: 0.7; transform: translate(-50%, -50%) scale(0.96); }
-    }
-    #splash img {
-      animation: pulse 2s ease-in-out infinite;
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(0.95); opacity: 0.8; }
     }
 
     .loading-dots {
-      position: fixed;
-      bottom: 15%;
-      left: 50%;
-      transform: translateX(-50%);
+      margin-top: 40px;
       display: flex;
-      gap: 8px;
+      gap: 12px;
     }
+
     .loading-dots span {
-      width: 8px;
-      height: 8px;
+      width: 10px;
+      height: 10px;
       border-radius: 50%;
-      background: rgba(255,255,255,0.7);
+      background: rgba(255, 255, 255, 0.7);
       animation: dotPulse 1.4s ease-in-out infinite;
     }
+
     .loading-dots span:nth-child(2) { animation-delay: 0.2s; }
     .loading-dots span:nth-child(3) { animation-delay: 0.4s; }
+
     @keyframes dotPulse {
       0%, 80%, 100% { opacity: 0.3; transform: scale(0.8); }
       40% { opacity: 1; transform: scale(1.2); }
@@ -151,23 +126,23 @@
   </style>
   <script id="splash-screen-script">
     function removeSplashFromWeb() {
-      document.getElementById("splash")?.remove();
-      document.getElementById("splash-branding")?.remove();
-      document.getElementById("loading-dots")?.remove();
+      document.getElementById("splash-container")?.remove();
       document.body.style.background = "transparent";
     }
   </script>
 </head>
 <body>
-  <picture id="splash">
-      <source srcset="splash/img/light-1x.png 1x, splash/img/light-2x.png 2x, splash/img/light-3x.png 3x, splash/img/light-4x.png 4x" media="(prefers-color-scheme: light)">
-      <source srcset="splash/img/dark-1x.png 1x, splash/img/dark-2x.png 2x, splash/img/dark-3x.png 3x, splash/img/dark-4x.png 4x" media="(prefers-color-scheme: dark)">
-      <img class="center" aria-hidden="true" src="splash/img/light-1x.png" alt="">
-  </picture>
-  
-  <!-- Loading dots indicator -->
-  <div id="loading-dots" class="loading-dots">
-    <span></span><span></span><span></span>
+  <div id="splash-container">
+    <picture id="splash">
+        <source srcset="splash/img/light-1x.png 1x, splash/img/light-2x.png 2x, splash/img/light-3x.png 3x, splash/img/light-4x.png 4x" media="(prefers-color-scheme: light)">
+        <source srcset="splash/img/dark-1x.png 1x, splash/img/dark-2x.png 2x, splash/img/dark-3x.png 3x, splash/img/dark-4x.png 4x" media="(prefers-color-scheme: dark)">
+        <img aria-hidden="true" src="splash/img/light-1x.png" alt="">
+    </picture>
+    
+    <!-- Loading dots indicator -->
+    <div id="loading-dots" class="loading-dots">
+      <span></span><span></span><span></span>
+    </div>
   </div>
   
   
